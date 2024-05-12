@@ -1,0 +1,10 @@
+<ng-container *ngIf="(state.loaded$ | async) else loader" >
+  <app-subject-list [subjects]="state.subjects$ | async" 
+                    [isInWishList]="wishlistFacade.isSubjectInWishList"
+                    (addToWishList)="addToWishList($event)"
+                    (removeFromWishList)="removeFromWishList($event)"></app-subject-list>
+</ng-container>
+
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>  

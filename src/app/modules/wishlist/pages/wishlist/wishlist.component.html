@@ -1,0 +1,7 @@
+<ng-container *ngIf="state.getWishList() as subjects">
+  <app-subject-list *ngIf="subjects?.length else noData" [subjects]="subjects" (removeFromWishList)="state.remove($event)"></app-subject-list>
+</ng-container>
+
+<ng-template #noData>
+  <app-no-data></app-no-data>
+</ng-template>

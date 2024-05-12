@@ -1,0 +1,37 @@
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+  <ng-container *ngFor="let item of subjects">
+    <mat-card class="px-4 py-2">
+      <mat-card-content class="mat-typography">
+        <div class="flex gap-3 w-full">
+          <a routerLink="/subject/{{item.id}}">
+            <img width="100px" height="70px" [src]="item.coverImage" alt="cover image" class="rounded-md shadow-md" />
+          </a>
+          <div class="flex-col flex-1">
+            <div class="flex gap-2">
+              <div class="subtitle font-bold">Published Year:</div>
+              <div>{{item.publishedDate}}</div>
+            </div>
+            <div class="flex gap-2">
+              <div class="subtitle font-bold">Title:</div>
+              <div><a routerLink="/subject/{{item.id}}" class="text-blue-600 hover:text-blue-800 transition duration-300 ease-in-out">{{item.name}}</a></div>
+            </div>
+            <div class="flex gap-2">
+              <div class="subtitle font-bold">Authors:</div>
+              <div *ngFor="let author of item.authors">
+                <a routerLink="/author/{{author.id}}" class="text-blue-600 hover:text-blue-800 transition duration-300 ease-in-out">{{author.name}}</a>
+              </div>
+            </div>
+            <hr class="border-b border-gray-200 my-4" />
+            <div class="flex gap-2 justify-end">
+              <button mat-raised-button routerLink="/subject/{{item.id}}" class="bg-orange-500 hover:bg-orange-700 text-white transition duration-300 ease-in-out">More</button>
+              <button *ngIf="(isInWishList && isInWishList(item.id)) else addWishListBtn" mat-raised-button color="primary" (click)="removeFromWishList.emit(item)" class="bg-red-500 hover:bg-red-700 text-white transition duration-300 ease-in-out">Remove from WishList</button>
+              <ng-template #addWishListBtn>
+                <button mat-raised-button color="primary" (click)="addToWishList.emit(item)" class="bg-green-500 hover:bg-green-700 text-white transition duration-300 ease-in-out">Add to WishList</button>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </ng-container>
+</div>
